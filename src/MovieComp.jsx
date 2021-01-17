@@ -11,8 +11,6 @@ const  MovieComp=(props)=>{
           <h3 >{m.original_title}</h3>
           <h3 style={{background:"#272532"}}className={m.vote_average <=8?"blue":"red"}>{m.vote_average}</h3>
           </div>
-  
-        
         </Card>
           })
         

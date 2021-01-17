@@ -6,6 +6,8 @@ import MovieComp from './MovieComp'
 import MovieModal from './MovieModal'
 import WishList from './wishlist'
 import axios from 'axios'
+import  Button  from "react-bootstrap/Button"
+import Backdrop from './backdrop'
 
 
 
@@ -23,11 +25,16 @@ class App extends Component {
     original_language:'en',
     genre_id:[],
     MoviesAdd:[],
-    wishlist:false
+    wishlist:false,
+    date:'',
+ 
       }
 
-
+    
   componentDidMount(){
+    
+  
+ 
     const api_url = 'https://api.themoviedb.org/3/';   
     const api_key =  '04c35731a5ee918f014970082a0088b1'
      axios.get(`${api_url}discover/movie?sort_by=popularity.desc&api_key=${api_key}&page=1`)
@@ -38,8 +45,15 @@ class App extends Component {
        })
       
     })
+    
+    
+  }
+  componentWillUnmount() {
+  
+    // this.getDate()  // clear timer upon component destruction
 
   }
+
   searchMovies=(e)=>{
     const api_url = 'https://api.themoviedb.org/3/';
     const api_key =  '04c35731a5ee918f014970082a0088b1'   
@@ -76,15 +90,28 @@ console.log(index.poster_path)
 
 
 
-addMoviesHandler=(index)=>{
+addMoviesHandler=(index,id)=>{
 const addNewMovies = this.state.MoviesAdd
-// stop array dupplicate
+// stop  duplicate item to add to my array
+
+  var Ourdate =  new Date()
+  var getOurTime = Ourdate.toTimeString()
+  console.log(getOurTime)
+  if(index=== true){
+    this.setState({
+      date:getOurTime
+    })
+  }
+
 if (addNewMovies.includes(index) === false) 
   addNewMovies.push(index)
   this.setState({
     MoviesAdd:addNewMovies
+    
+ 
   })
-  console.log("hello")
+  localStorage.setItem(index, this.state.MoviesAdd);
+  
 }
 
 
@@ -93,21 +120,20 @@ handleWishList=()=>{
     wishlist:!prevState.wishlist
   }))
 }
+
 handleRemoveMovies=(e)=>{
   console.log(e + " first step")
   let deletemovies= this.state.MoviesAdd.filter((title,id)=>{
     title=title!==e
       return title
-  
   }) 
-  
-
   this.setState({
-    MoviesAdd:deletemovies
+    MoviesAdd:deletemovies,
   })
 
 
 }
+
 
   render(){
     // const MoviesAdd = this.state.MoviesAdd.map((title,id)=>{
@@ -116,7 +142,7 @@ handleRemoveMovies=(e)=>{
     //   })
     return (
       <div>
-                <WishList MoviesAdd={this.state.MoviesAdd} wishlist={this.state.wishlist}handleWishList={this.handleWishList}handleRemoveMovies={this.handleRemoveMovies}/>
+  <WishList MoviesAdd={this.state.MoviesAdd} wishlist={this.state.wishlist}handleWishList={this.handleWishList}handleRemoveMovies={this.handleRemoveMovies} date={this.state.date}/>
 
  <div style={{background:"#272532"}} className="container">
 
@@ -136,14 +162,16 @@ handleRemoveMovies=(e)=>{
    original_language={this.state.original_language}
    title={this.state.title}
    HandlerAddMovies={this.addMoviesHandler}
+   date={this.getDate}
    MoviesAdd={this.state.MoviesAdd}>
-
-   </MovieModal>
-
+    
+     
+ </MovieModal>
+<Backdrop show={this.state.show} openNcloseHandler={this.modalHandler} />
     </div> 
     <div >
    {/* <ul>{MoviesAdd}</ul> */}
-
+<Button onClick={this.getDate}>click for time</Button>
  
 </div>
 

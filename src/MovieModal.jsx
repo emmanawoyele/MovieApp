@@ -16,7 +16,7 @@ const MovieModal=(props)=>{
        Language:<span>{props.original_language}</span> <br/>
             </address>
             {/* <AddButton  onClick={()=>props.HandlerAddMovies(props.title)} MoviesAdd={props.MoviesAdd}/> */}
-            <AddButton  HandlerAddMovies={()=>props.HandlerAddMovies(props.title)} MoviesAdd={props.MoviesAdd}/>
+            <AddButton  HandlerAddMovies={()=>props.HandlerAddMovies(props.title ,props.id)} MoviesAdd={props.MoviesAdd}  />
 
         </div>
        
@@ -25,7 +25,7 @@ const MovieModal=(props)=>{
 
     return <div  >
        {ModalOpener}
-     {/* {props.children} */}
+   
     </div>
 
 }
