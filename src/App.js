@@ -171,7 +171,7 @@ handleRemoveMovies=(e)=>{
     </div> 
     <div >
    {/* <ul>{MoviesAdd}</ul> */}
-<Button onClick={this.getDate}>click for time</Button>
+
  
 </div>
 

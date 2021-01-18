@@ -2,7 +2,7 @@
 const WishList=(props)=>{
     const MoviesAdd = props.MoviesAdd.map((title,id)=>{
         console.log(title)
-        return <li Key={id}>{title}:{props.date}<i onClick={()=>props.handleRemoveMovies(title)} class="fas fa-trash-alt"></i></li>
+        return <li Key={id}>{title}<i onClick={()=>props.handleRemoveMovies(title)} class="fas fa-trash-alt"></i></li>
         })
         let wishlist =props.wishlist===true?
         <div className="wishlist" style={{
