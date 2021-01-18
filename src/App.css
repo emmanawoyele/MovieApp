@@ -65,6 +65,7 @@ p.message{
   display:flex;
   justify-content: space-between;
   padding-top: 10px;
+  flex-wrap: wrap;
 }
 .rating{
   color:white
@@ -97,7 +98,7 @@ height:500px;
 }
 .modal_show .information_container img{
  height: 100%!important;
- /* object-fit: cover; */
+ object-fit: cover;
 
 }
 .more_information address{
@@ -222,4 +223,13 @@ span.close_button {
   background: rgba(0, 0, 0, 0.5);
 }
 
-  
+@media only screen and (max-width:600px) {
+  .movie_box{
+    grid-template-columns:1fr 1fr
+  }
+}
+@media only screen and (max-device-width: 480px){
+  .movie_box{
+    grid-template-columns:1fr
+  }
+}
